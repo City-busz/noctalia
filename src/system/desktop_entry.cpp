@@ -736,9 +736,9 @@ std::vector<DesktopEntry> scanDesktopEntries(std::string_view language) {
     }
   }
 
-  // Sort by name for consistent ordering
+  // Collate lowercased names so ordering follows LC_COLLATE and stays case-insensitive under the C locale.
   std::ranges::sort(entries, [](const DesktopEntry& a, const DesktopEntry& b) {
-    return std::strcoll(a.name.c_str(), b.name.c_str()) < 0;
+    return std::strcoll(a.nameLower.c_str(), b.nameLower.c_str()) < 0;
   });
 
   return entries;
