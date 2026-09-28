@@ -40,7 +40,7 @@ namespace settings {
 
     void sortSearchOptions(std::vector<SearchPickerOption>& options) {
       std::ranges::sort(options, [](const SearchPickerOption& a, const SearchPickerOption& b) {
-        const int result = std::strcoll(a.label.c_str(), b.label.c_str());
+        const int result = std::strcoll(StringUtils::toLower(a.label).c_str(), StringUtils::toLower(b.label).c_str());
         if (result == 0) {
           return a.value < b.value;
         }
